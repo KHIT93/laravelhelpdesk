@@ -20,7 +20,7 @@ class CreateHelpdeskTicketMessageAttachmentsTable extends Migration
             $table->text('path');
             $table->timestamps();
 
-            $table->foreign('helpdesk_ticket_message_id')->references('id')->on('helpdesk_ticket_messages')->onDelete('cascade');
+            $table->foreign('helpdesk_ticket_message_id', 'attachments_message_id_foreign')->references('id')->on('helpdesk_ticket_messages')->onDelete('cascade');
         });
     }
 
