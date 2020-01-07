@@ -54,7 +54,7 @@ class HelpdeskTeamController extends Controller
             'email_encryption' => 'required'
         ]);
 
-        $team = HelpdeskTeam::create($data);
+        $team = HelpdeskTeam::create($request->all());
         return redirect(route('teams.show', ['team' => $team->id]));
     }
 
@@ -97,7 +97,7 @@ class HelpdeskTeamController extends Controller
             'email_pass' => 'present',
             'email_encryption' => 'required'
         ]);
-        $team->save($data);
+        $team->save($request->all());
         
         return redirect(route('teams.show',['team' => $team->id]));
     }

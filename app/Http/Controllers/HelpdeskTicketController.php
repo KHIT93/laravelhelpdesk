@@ -59,7 +59,7 @@ class HelpdeskTicketController extends Controller
             'stage' => 'present'
 
         ]);
-        $ticket = HelpdeskTicket::create($data);
+        $ticket = HelpdeskTicket::create($request->all());
         return redirect(route('tickets.show', ['ticket' => $ticket->id]));
     }
 
@@ -100,9 +100,10 @@ class HelpdeskTicketController extends Controller
             'subject' => 'present',
             'description' => 'present',
             'priority' => 'present',
-            'stage' => 'present'
+            'stage' => 'present',
+            'user_id' => 'present'
         ]);
-        $ticket->update($data);
+        $ticket->update($request->all());
         return redirect(route('tickets.show', ['ticket' => $ticket->id]));
     }
 
@@ -117,6 +118,7 @@ class HelpdeskTicketController extends Controller
     {
         $data = $request->validate(['message' => 'required', 'from' => 'required']);
         $data['user_id'] = Auth::id();
+        $data['is_note'] = $request->is_note;
         
         $message = $ticket->messages()->create($data);
         if ($request->hasFile('attachments'))
@@ -130,7 +132,10 @@ class HelpdeskTicketController extends Controller
                 ]);
             }
         }
-        Mail::to($ticket->owner)->send(new TicketReply($ticket, $message));
+        if (!$request->is_note)
+        {
+            Mail::to($ticket->owner)->send(new TicketReply($ticket, $message));
+        }
         return redirect(route('tickets.show', ['ticket' => $ticket->id]));
     }
 

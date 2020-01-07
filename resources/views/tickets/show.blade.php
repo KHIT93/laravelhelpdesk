@@ -102,6 +102,15 @@
                         <input type="file" name="attachments[]" class="form-control my-1 py-1">
                         <input type="file" name="attachments[]" class="form-control my-1 py-1">
                         <input type="file" name="attachments[]" class="form-control my-1 py-1">
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="is_note" id="is_note">
+
+                                <label class="form-check-label" for="remember">
+                                    {{ __('Store as a note') }}
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Send</button>
@@ -111,10 +120,11 @@
 
             @if($ticket->hasMessages())
             @foreach($ticket->messages as $message)
-            <div class="card mb-1">
+            <div class="card mb-1{{ ($message->is_note) ? ' bg-secondary text-white' : '' }}">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2 border-right">
+                            <p>{{ ($message->is_note) ? 'Note' : 'Message' }}:</p>
                             <p>{{$message->from}}</p>
                             <p>{{$message->created_at->diffForHumans()}}</p>
                         </div>
