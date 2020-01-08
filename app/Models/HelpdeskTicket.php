@@ -9,7 +9,17 @@ use App\User;
 
 class HelpdeskTicket extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'helpdesk_team_id',
+        'user_id',
+        'owner',
+        'priority',
+        'stage',
+        'subject',
+        'description',
+        'created_at',
+        'updated_at'
+    ];
 
     public function team()
     {

@@ -11,7 +11,16 @@ use DOMXPath;
 
 class HelpdeskTicketMessage extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'helpdesk_ticket_id',
+        'user_id',
+        'from',
+        'message',
+        'html',
+        'is_note',
+        'created_at',
+        'updated_at'
+    ];
 
     /**
      * The attributes that should be cast to native types.

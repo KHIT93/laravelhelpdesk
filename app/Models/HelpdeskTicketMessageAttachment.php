@@ -7,7 +7,13 @@ use App\Models\HelpdeskTicketMessage;
 
 class HelpdeskTicketMessageAttachment extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'helpdesk_ticket_message_id',
+        'name',
+        'path',
+        'created_at',
+        'updated_at'
+    ];
 
     public function message()
     {
