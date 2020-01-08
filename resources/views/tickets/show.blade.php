@@ -129,7 +129,7 @@
                             <p>{{$message->created_at->diffForHumans()}}</p>
                         </div>
                         <div class="col-md-10">
-                            <div>{{ $message->message ?? $message->viewHTML() }}</div>
+                            <div>{{ $message->message ?? nl2br(e($message->viewHTML())) }}</div>
                             @if (count($message->attachments))
                             <div>
                                 <ul>
