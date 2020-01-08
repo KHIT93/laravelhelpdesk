@@ -46,7 +46,7 @@
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="6">There are currently no tickets needing attention. Good job!</td>
+                                <td colspan="7">There are currently no tickets needing attention. Good job!</td>
                             </tr>
                             @endif
                         </tbody>

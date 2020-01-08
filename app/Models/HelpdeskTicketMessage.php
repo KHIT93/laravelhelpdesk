@@ -18,6 +18,7 @@ class HelpdeskTicketMessage extends Model
         'message',
         'html',
         'is_note',
+        'message_id',
         'created_at',
         'updated_at'
     ];

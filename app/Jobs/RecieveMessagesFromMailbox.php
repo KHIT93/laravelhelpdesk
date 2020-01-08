@@ -67,7 +67,7 @@ class RecieveMessagesFromMailbox
                 // foreach ($inbox->query()->unseen()->get() as $message)
                 foreach ($inbox->messages()->all()->get() as $message)
                 {
-                    echo 'Processing message: ' . $message->getSubject() . '' . chr(10);
+                    echo 'Processing message: ' . $message->getMessageId() . '' . chr(10);
                     $match = false;
                     $new = false;
                     $matches = [];
@@ -75,6 +75,13 @@ class RecieveMessagesFromMailbox
                     if (count($matches))
                     {
                         $match = $matches[0];
+                    }
+
+                    if (HelpdeskTicketMessage::whereMessageId($message->getMessageId())->count() > 0)
+                    {
+                        // Message already exists, so no need to process it again
+                        echo 'Message ' . $message->getMessageId() . ' does already exist';
+                        continue;
                     }
 
                     $ticket = HelpdeskTicket::whereId((int)str_replace(']','',str_replace('[','',$match)))->first();
@@ -104,6 +111,7 @@ class RecieveMessagesFromMailbox
                         'from' => $message->getFrom()[0]->full,
                         'message' => ($message->hasTextBody()) ? $message->getTextBody() : null,
                         'html' => ($message->hasHTMLBody()) ? $message->getHTMLBody() : null,
+                        'message_id' => $message->getMessageId(),
                         'created_at' => $message->getDate(),
                         'updated_at' => \Carbon\Carbon::now()
                     ]);
@@ -141,14 +149,22 @@ class RecieveMessagesFromMailbox
                         }
                         Mail::to($recipients)->send(new TicketReply($ticket, $ticketMessage));
                     }
-                    if ($message->moveToFolder('Read') == true)
+                    try
                     {
-                        echo 'Message moved succesfully to archive' . chr(10);
+                        $message->moveToFolder('Read');
                     }
-                    else
+                    catch(\Exception $e)
                     {
-                        echo 'Message not moved to archive' . chr(10);
+                        echo $e->getMessage();
                     }
+                    // if ($message->moveToFolder('Read') == true)
+                    // {
+                    //     echo 'Message moved succesfully to archive' . chr(10);
+                    // }
+                    // else
+                    // {
+                    //     echo 'Message not moved to archive' . chr(10);
+                    // }
                     sleep(5);
                 }
                 $client->disconnect();

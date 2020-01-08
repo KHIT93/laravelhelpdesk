@@ -8,7 +8,15 @@ use App\User;
 
 class HelpdeskTeam extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'email',
+        'email_host',
+        'email_user',
+        'email_pass',
+        'email_encryption',
+        'email_protocol'
+    ];
 
     public function tickets()
     {

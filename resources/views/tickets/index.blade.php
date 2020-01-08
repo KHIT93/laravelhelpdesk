@@ -44,7 +44,7 @@
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="6">There are currently no open tickets!</td>
+                                <td colspan="7">There are currently no open tickets!</td>
                             </tr>
                             @endif
                         </tbody>
