@@ -17,6 +17,7 @@ class HelpdeskTicket extends Model
         'stage',
         'subject',
         'description',
+        'billing_type',
         'created_at',
         'updated_at'
     ];

@@ -65,6 +65,17 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-3">
+                                        <label class="pt-2" for="priority"><strong>Priority:</strong></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <select class="form-control" id="billing_type" required name="billing_type">
+                                            <option value="not billable" {{ ($ticket->billing_type == 'not billable' || old('billing_type') == 'not billable') ? 'selected' : '' }}>Not billable</option>
+                                            <option value="billable" {{ ($ticket->billing_type == 'billable' || old('billing_type') == 'billable') ? 'selected' : '' }}>Billable</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-3">
                                         <label class="pt-2" for="user_id"><strong>Assigned To:</strong></label>
                                     </div>
                                     <div class="col-9">

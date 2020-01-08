@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             @if (session('status'))
             <div class="card">
                 <div class="card-header">Dashboard</div>
@@ -26,6 +26,7 @@
                                 <th>Subject</th>
                                 <th>From</th>
                                 <th>Stage</th>
+                                <th>Billing</th>
                                 <th>Last Update</th>
                                 <th></th>
                             </tr>
@@ -38,6 +39,7 @@
                                 <td><a href="{{ route('tickets.show', ['ticket' => $ticket->id]) }}">{{$ticket->subject}}</a></td>
                                 <td>{{$ticket->owner}}</td>
                                 <td>{{$ticket->stage}}</td>
+                                <td>{{$ticket->billing_type}}</td>
                                 <td>{{$ticket->updated_at->diffForHumans()}}</td>
                                 <td></td>
                             </tr>
