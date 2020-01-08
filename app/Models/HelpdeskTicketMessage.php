@@ -44,9 +44,8 @@ class HelpdeskTicketMessage extends Model
 
     public function viewHTML()
     {
-        libxml_use_internal_errors(false);
         $dom = new DOMDocument();
-        $dom->loadHTML($this->html);
+        $dom->loadHTML($this->html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
         $xpath = new DOMXPath($dom);
         $body = $xpath->query("//body")[0]->nodeValue;
         return $body;
