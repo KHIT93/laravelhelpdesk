@@ -11,7 +11,7 @@ A ticket with reference **#{{$ticket->id}}** has been created by **{{ ($message)
 @endif
 @if($message)
 @component('mail::panel')
-{!! e($message->message) ?? nl2br(e($message->viewHTML())) !!}
+{!! ($message->message) ? e($message->message) : nl2br(e($message->viewHTML())) !!}
 @endcomponent
 @endif
 
