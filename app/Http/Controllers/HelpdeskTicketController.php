@@ -148,7 +148,7 @@ class HelpdeskTicketController extends Controller
     {
         $data = $request->validate(['message' => 'required', 'from' => 'required', 'is_note' => 'boolean']);
         $data['user_id'] = Auth::id();
-        $data['is_note'] = $request->is_note;
+        $data['is_note'] = $request->is_note ?? false;
         
         $message = $ticket->messages()->create($data);
         if ($request->hasFile('attachments'))
@@ -162,7 +162,7 @@ class HelpdeskTicketController extends Controller
                 ]);
             }
         }
-        if (!$request->is_note)
+        if (!$data['is_note'])
         {
             Mail::to($ticket->owner)->send(new TicketReply($ticket, $message));
         }
