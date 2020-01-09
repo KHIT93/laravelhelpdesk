@@ -33,6 +33,36 @@ class HelpdeskTicketController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all()
+    {
+        return view('tickets.all', ['teams' => HelpdeskTeam::all()->get()]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function closed()
+    {
+        return view('tickets.closed', ['teams' => HelpdeskTeam::all()->get()]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function active()
+    {
+        return view('tickets.active', ['teams' => HelpdeskTeam::all()->get()]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

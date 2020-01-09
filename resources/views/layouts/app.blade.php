@@ -49,7 +49,16 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tickets.index') }}">Tickets</a>
+                                <a class="nav-link" href="{{ route('tickets.index') }}">View Open Tickets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tickets.all') }}">View All Tickets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tickets.closed') }}">View Closed Tickets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tickets.active') }}">View Tickets In Progress</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('teams.index') }}">Teams</a>

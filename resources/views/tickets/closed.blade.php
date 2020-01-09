@@ -6,21 +6,22 @@
         <div class="col-md-12">
             @if (session('status'))
             <div class="card">
+                <div class="card-header">Closed/Cancelled Helpdesk Tickets</div>
                 <div class="card-body">
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
                 </div>
             </div>
             @endif
-            <div class="card">
-                <div class="card-header">Manage Helpdesk Tickets</div>
+
+            @foreach($teams as $team)
+            <div class="card my-4">
+                <div class="card-header">{{$team->name}}</div>
                 <div class="card-body">
-                    <a href="{{ route('tickets.create') }}" class="btn btn-primary mb-3">Create ticket</a>
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Team</th>
                                 <th>Priority</th>
                                 <th>Subject</th>
                                 <th>From</th>
@@ -31,28 +32,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if($tickets->count())
-                            @foreach($tickets as $ticket)
+                            @if($team->hasTickets())
+                            @foreach($team->tickets as $ticket)
                             <tr>
-                                <td>{{$ticket->team->name}}</td>
                                 <td>{{$ticket->priority}}</td>
                                 <td><a href="{{ route('tickets.show', ['ticket' => $ticket->id]) }}">{{$ticket->subject}}</a></td>
                                 <td>{{$ticket->owner}}</td>
                                 <td>{{$ticket->stage}}</td>
                                 <td>{{$ticket->billing_type}}</td>
                                 <td>{{$ticket->updated_at->diffForHumans()}}</td>
-                                <td><a href="{{ route('tickets.edit',['ticket'=>$ticket->id]) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <td></td>
                             </tr>
                             @endforeach
                             @else
                             <tr>
-                                <td colspan="8">There are currently no open tickets!</td>
+                                <td colspan="7">There are currently no closed/cancelled tickets</td>
                             </tr>
                             @endif
                         </tbody>
                     </table>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>
