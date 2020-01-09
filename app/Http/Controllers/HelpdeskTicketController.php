@@ -39,7 +39,7 @@ class HelpdeskTicketController extends Controller
      */
     public function all()
     {
-        return view('tickets.all', ['teams' => HelpdeskTeam::all()->get()]);
+        return view('tickets.all', ['teams' => HelpdeskTeam::all()]);
     }
 
     /**
@@ -49,7 +49,7 @@ class HelpdeskTicketController extends Controller
      */
     public function closed()
     {
-        return view('tickets.closed', ['teams' => HelpdeskTeam::all()->get()]);
+        return view('tickets.closed', ['teams' => HelpdeskTeam::all()]);
     }
 
     /**
@@ -59,7 +59,7 @@ class HelpdeskTicketController extends Controller
      */
     public function active()
     {
-        return view('tickets.active', ['teams' => HelpdeskTeam::all()->get()]);
+        return view('tickets.active', ['teams' => HelpdeskTeam::all()]);
     }
 
     /**
