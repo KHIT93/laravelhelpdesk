@@ -146,7 +146,7 @@ class HelpdeskTicketController extends Controller
      */
     public function message(Request $request, HelpdeskTicket $ticket)
     {
-        $data = $request->validate(['message' => 'required', 'from' => 'required']);
+        $data = $request->validate(['message' => 'required', 'from' => 'required', 'is_note' => 'present|boolean']);
         $data['user_id'] = Auth::id();
         $data['is_note'] = $request->is_note;
         

@@ -115,7 +115,7 @@
                         <input type="file" name="attachments[]" class="form-control my-1 py-1">
                         <div class="form-group">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="is_note" id="is_note">
+                                <input class="form-check-input" type="checkbox" name="is_note" id="is_note" value="1">
 
                                 <label class="form-check-label" for="remember">
                                     {{ __('Store as a note') }}
