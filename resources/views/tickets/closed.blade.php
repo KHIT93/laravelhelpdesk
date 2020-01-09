@@ -32,8 +32,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if($team->hasTickets())
-                            @foreach($team->tickets as $ticket)
+                            @if($team->hasClosedTickets())
+                            @foreach($team->closedTickets() as $ticket)
                             <tr>
                                 <td>{{$ticket->priority}}</td>
                                 <td><a href="{{ route('tickets.show', ['ticket' => $ticket->id]) }}">{{$ticket->subject}}</a></td>
