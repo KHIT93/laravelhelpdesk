@@ -130,7 +130,7 @@
             </div>
 
             @if($ticket->hasMessages())
-            @foreach($ticket->messages as $message)
+            @foreach($ticket->messages()->orderBy('created_at','desc')->get() as $message)
             <div class="card mb-1{{ ($message->is_note) ? ' bg-secondary text-white' : '' }}">
                 <div class="card-body">
                     <div class="row">
