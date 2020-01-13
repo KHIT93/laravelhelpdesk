@@ -33,6 +33,36 @@ class HelpdeskTicketController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all()
+    {
+        return view('tickets.all', ['teams' => HelpdeskTeam::all()]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function closed()
+    {
+        return view('tickets.closed', ['teams' => HelpdeskTeam::all()]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function active()
+    {
+        return view('tickets.active', ['teams' => HelpdeskTeam::all()]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -116,9 +146,9 @@ class HelpdeskTicketController extends Controller
      */
     public function message(Request $request, HelpdeskTicket $ticket)
     {
-        $data = $request->validate(['message' => 'required', 'from' => 'required']);
+        $data = $request->validate(['message' => 'required', 'from' => 'required', 'is_note' => 'boolean']);
         $data['user_id'] = Auth::id();
-        $data['is_note'] = $request->is_note;
+        $data['is_note'] = $request->is_note ?? false;
         
         $message = $ticket->messages()->create($data);
         if ($request->hasFile('attachments'))
@@ -132,7 +162,7 @@ class HelpdeskTicketController extends Controller
                 ]);
             }
         }
-        if (!$request->is_note)
+        if (!$data['is_note'])
         {
             Mail::to($ticket->owner)->send(new TicketReply($ticket, $message));
         }

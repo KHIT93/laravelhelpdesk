@@ -28,6 +28,9 @@ Route::prefix('teams')->name('teams.')->group(function(){
 
 Route::prefix('tickets')->name('tickets.')->group(function(){
     Route::get('/', 'HelpdeskTicketController@index')->name('index');
+    Route::get('all', 'HelpdeskTicketController@all')->name('all');
+    Route::get('closed', 'HelpdeskTicketController@closed')->name('closed');
+    Route::get('active', 'HelpdeskTicketController@active')->name('active');
     Route::get('create', 'HelpdeskTicketController@create')->name('create');
     Route::post('create', 'HelpdeskTicketController@store')->name('store');
     Route::get('{ticket}', 'HelpdeskTicketController@show')->name('show');

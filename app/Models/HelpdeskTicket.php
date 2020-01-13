@@ -60,4 +60,12 @@ class HelpdeskTicket extends Model
     {
         return $query->whereIn('stage', ['new', 'customer_reply']);
     }
+    public function scopeClosedTickets($query)
+    {
+        return $query->whereIn('stage', ['closed', 'cancelled']);
+    }
+    public function scopeActiveTickets($query)
+    {
+        return $query->whereIn('stage', ['in_progress',]);
+    }
 }

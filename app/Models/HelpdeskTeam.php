@@ -23,6 +23,11 @@ class HelpdeskTeam extends Model
         return $this->hasMany(HelpdeskTicket::class);
     }
 
+    public function hasTickets()
+    {
+        return !! $this->tickets()->count();
+    }
+
     public function members()
     {
         return $this->hasMany(User::class);
@@ -46,5 +51,25 @@ class HelpdeskTeam extends Model
     public function hasOpenTickets()
     {
         return !! $this->tickets()->whereIn('stage', ['new','in_progress','customer_reply'])->count();
+    }
+
+    public function closedTickets()
+    {
+        return $this->tickets()->whereIn('stage', ['closed', 'cancelled']);
+    }
+
+    public function hasClosedTickets()
+    {
+        return !! $this->tickets()->whereIn('stage', ['closed', 'cancelled'])->count();
+    }
+
+    public function activeTickets()
+    {
+        return $this->tickets()->whereIn('stage', ['in_progress']);
+    }
+
+    public function hasActiveTickets()
+    {
+        return !!$this->tickets()->whereIn('stage', ['in_progress'])->count();
     }
 }
